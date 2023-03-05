@@ -1,20 +1,32 @@
+.container {
+	width: 100%;
+	background: var(--primary);
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0562443);
+}
+
 .header {
-	outline: 1px solid black;
 	text-align: center;
-	margin: 3em 0;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.header h1 {
+	padding: 10px;
 }
 
 .nav {
 	display: flex;
 	justify-content: center;
+	align-self: center;
 	gap: 2em;
-	margin-top: 10px;
 }
 
 @media (min-width: 768px) {
 	.header {
 		display: flex;
 		justify-content: space-between;
-		padding: 0 2em;
+	}
+	.nav {
+		padding-right: 10px;
 	}
 }

@@ -1,7 +1,13 @@
 import Head from 'next/head';
 import styles from '@/styles/Home.module.css';
+import { Country } from '@/types';
+import Card from '@/components/Card';
 
-export default function Home() {
+interface Props {
+	countries: Country[];
+}
+
+export default function Home({ countries }: Props) {
 	return (
 		<>
 			<Head>
@@ -10,7 +16,21 @@ export default function Home() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<main>body</main>
+			<main className={styles.container}>
+				<div className={styles.card_container}>
+					{countries && countries.map((c) => <Card key={c.name.common} country={c} />)}
+				</div>
+			</main>
 		</>
 	);
 }
+
+export const getStaticProps = async () => {
+	const res = await fetch('https://restcountries.com/v3.1/all');
+	const data = await res.json();
+	return {
+		props: {
+			countries: data,
+		},
+	};
+};
