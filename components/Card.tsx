@@ -1,33 +1,42 @@
-import { Country } from '@/types';
 import Image from 'next/image';
 import React from 'react';
 import styles from '@/styles/Card.module.css';
+import Link from 'next/link';
 
 interface Props {
-	country: Country;
+	name: string;
+	alpha3Code: string;
+	population: number;
+	region: string;
+	capital?: string;
+	flag: string;
 }
-function Card({ country }: Props) {
+
+function Card({ name, alpha3Code, population, region, capital, flag }: Props) {
+	console.log('flag', flag);
 	return (
-		<div className={styles.card}>
-			<Image src={country.flags.svg} alt={country.flag} width={300} height={300} />
-			<div>
-				<h3>{country.name.common}</h3>
-				<ul>
-					<li>
-						<span>Population: </span>
-						{country.population}
-					</li>
-					<li>
-						<span>Region: </span>
-						{country.region ?? '-'}
-					</li>
-					<li>
-						<span>Capital: </span>
-						{country.capital ?? '-'}
-					</li>
-				</ul>
+		<Link href={`/details/${alpha3Code}`}>
+			<div className={styles.card}>
+				<Image src={flag} alt="country flag" width={300} height={300} priority />
+				<div>
+					<h3>{name}</h3>
+					<ul>
+						<li>
+							<span>Population: </span>
+							{population}
+						</li>
+						<li>
+							<span>Region: </span>
+							{region ?? '-'}
+						</li>
+						<li>
+							<span>Capital: </span>
+							{capital ?? '-'}
+						</li>
+					</ul>
+				</div>
 			</div>
-		</div>
+		</Link>
 	);
 }
 

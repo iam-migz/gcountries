@@ -18,7 +18,7 @@ export default function Home({ countries }: Props) {
 			</Head>
 			<main className={styles.container}>
 				<div className={styles.card_container}>
-					{countries && countries.map((c) => <Card key={c.name.common} country={c} />)}
+					{countries && countries.map((c) => <Card key={c.alpha3Code} {...c} />)}
 				</div>
 			</main>
 		</>
@@ -26,7 +26,7 @@ export default function Home({ countries }: Props) {
 }
 
 export const getStaticProps = async () => {
-	const res = await fetch('https://restcountries.com/v3.1/all');
+	const res = await fetch('https://restcountries.com/v2/all?fields=name,alpha3Code,capital,region,population,flag');
 	const data = await res.json();
 	return {
 		props: {

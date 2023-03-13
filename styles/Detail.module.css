@@ -1,0 +1,41 @@
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	margin-top: 2em;
+}
+
+.main {
+	padding: 0 1.5em;
+	font-size: 0.85rem;
+}
+
+.main img {
+	border-radius: 0.5em;
+}
+.main h2 {
+	margin: 0.7em 0 0.5em 0;
+}
+.main span {
+	font-weight: bold;
+}
+.main li {
+	margin-top: 0.1em;
+}
+
+.info {
+	display: flex;
+	justify-content: space-between;
+}
+.info div {
+	width: 50%;
+}
+
+.borders {
+	margin-top: 0.5em;
+}
+
+@media (min-width: 768px) {
+	.main {
+		font-size: 1rem;
+	}
+}

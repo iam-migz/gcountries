@@ -1,65 +1,65 @@
 export interface Country {
-	name: Name;
-	independent?: boolean;
-	unMember: boolean;
-	capital?: string[];
-	altSpellings: string[];
-	region: Region;
-	subregion?: string;
-	languages?: { [key: string]: string };
-	borders?: string[];
-	flag: string;
-	maps: Maps;
+	name: string;
+	alpha3Code: string;
+	capital?: string;
+	altSpellings?: string[];
+	subregion: string;
+	region: string;
 	population: number;
-	fifa?: string;
+	demonym: string;
 	timezones: string[];
-	continents: Continent[];
-	flags: Flags;
-	coatOfArms: CoatOfArms;
+	borders?: string[];
+	nativeName: string;
+	currencies?: Currency[];
+	regionalBlocs?: RegionalBloc[];
+	independent: boolean;
+	flag: string;
 }
 
-export interface CoatOfArms {
-	png?: string;
-	svg?: string;
+// name,alpha3Code,capital,altSpellings,subregion,region,population,demonym,timezones,borders,nativeName,flag,currencies,regionalBlocs,independent
+
+export interface Currency {
+	code: string;
+	name: string;
+	symbol: string;
 }
 
-export enum Continent {
-	Africa = 'Africa',
-	Antarctica = 'Antarctica',
-	Asia = 'Asia',
-	Europe = 'Europe',
-	NorthAmerica = 'North America',
-	Oceania = 'Oceania',
-	SouthAmerica = 'South America',
+export interface Language {
+	iso639_1?: string;
+	iso639_2: string;
+	name: string;
+	nativeName?: string;
 }
 
-export interface Flags {
-	png: string;
-	svg: string;
-	alt?: string;
+// enum this later
+// export enum Region {
+// 	Africa = 'Africa',
+// 	Americas = 'Americas',
+// 	Antarctic = 'Antarctic',
+// 	AntarcticOcean = 'Antarctic Ocean',
+// 	Asia = 'Asia',
+// 	Europe = 'Europe',
+// 	Oceania = 'Oceania',
+// 	Polar = 'Polar',
+// }
+
+export interface RegionalBloc {
+	acronym: Acronym;
+	name: string;
 }
 
-export interface Maps {
-	googleMaps: string;
-	openStreetMaps: string;
-}
-
-export interface Name {
-	common: string;
-	official: string;
-	nativeName?: { [key: string]: Translation };
-}
-
-export interface Translation {
-	official: string;
-	common: string;
-}
-
-export enum Region {
-	Africa = 'Africa',
-	Americas = 'Americas',
-	Antarctic = 'Antarctic',
-	Asia = 'Asia',
-	Europe = 'Europe',
-	Oceania = 'Oceania',
+export enum Acronym {
+	Al = 'AL',
+	Asean = 'ASEAN',
+	Au = 'AU',
+	Cais = 'CAIS',
+	Caricom = 'CARICOM',
+	Cefta = 'CEFTA',
+	Eeu = 'EEU',
+	Efta = 'EFTA',
+	Eu = 'EU',
+	Nafta = 'NAFTA',
+	Pa = 'PA',
+	Saarc = 'SAARC',
+	Usan = 'USAN',
 }
