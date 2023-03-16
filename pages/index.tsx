@@ -2,6 +2,7 @@ import Head from 'next/head';
 import styles from '@/styles/Home.module.css';
 import { Country } from '@/types';
 import Card from '@/components/Card';
+import SearchBar from '@/components/SearchBar';
 
 interface Props {
 	countries: Country[];
@@ -17,6 +18,7 @@ export default function Home({ countries }: Props) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main className={styles.container}>
+				<div>{/* <SearchBar /> */}</div>
 				<div className={styles.card_container}>
 					{countries && countries.map((c) => <Card key={c.alpha3Code} {...c} />)}
 				</div>

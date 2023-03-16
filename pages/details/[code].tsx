@@ -11,10 +11,12 @@ function details({ country }: Props) {
 	return (
 		<div className={styles.container}>
 			<main className={styles.main}>
-				<img src={country.flag} alt={`flag of ${country.name}`} />
-				<h2>{country.name}</h2>
-				<div className={styles.info}>
-					<div>
+				<div className={styles.flag}>
+					<img src={country.flag} alt={`flag of ${country.name}`} />
+				</div>
+				<div className={styles.detail}>
+					<h2>{country.name}</h2>
+					<div className={styles.info}>
 						<ul>
 							<li>
 								<span>Native Name:</span> {country.name}
@@ -29,11 +31,10 @@ function details({ country }: Props) {
 								<span>Currencies:</span> {country.currencies?.map((c) => c.name)}
 							</li>
 							<li>
-								<span>Regional Bloc:</span> {country.regionalBlocs?.map((m) => m.acronym)}
+								<span>Regional Bloc:</span>{' '}
+								{country.regionalBlocs?.length ? country.regionalBlocs.map((m) => m.acronym) : 'None'}
 							</li>
 						</ul>
-					</div>
-					<div>
 						<ul>
 							<li>
 								<span>Region:</span> {country.region}
@@ -47,15 +48,12 @@ function details({ country }: Props) {
 							<li>
 								<span>Population:</span> {country.population}
 							</li>
-							<li>
-								<span>Timezones:</span> {country.timezones.toString()}
-							</li>
 						</ul>
 					</div>
-				</div>
-				<div className={styles.borders}>
-					<h4>Border Countries:</h4>
-					<div>{country.borders?.toString()}</div>
+					<div className={styles.borders}>
+						<h4>Border Countries:</h4>
+						<div>{country.borders?.toString()}</div>
+					</div>
 				</div>
 			</main>
 		</div>
@@ -84,7 +82,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context: any) => {
 	const { code } = context.params;
 	const res = await fetch(
-		`https://restcountries.com/v2/alpha/${code}?fields=name,alpha3Code,capital,altSpellings,subregion,region,population,demonym,timezones,borders,nativeName,flag,currencies,regionalBlocs,independent`
+		`https://restcountries.com/v2/alpha/${code}?fields=name,alpha3Code,capital,altSpellings,subregion,region,population,demonym,borders,nativeName,flag,currencies,regionalBlocs,independent`
 	);
 	const data = await res.json();
 	console.log('data :>> ', data);

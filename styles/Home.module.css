@@ -1,6 +1,7 @@
 .container {
 	max-width: 1200px;
 	margin: 0 auto;
+	margin-top: 3em;
 }
 
 .card_container {
@@ -11,8 +12,8 @@
 }
 @media (min-width: 48em) {
 	.card_container {
-		padding-top: 3rem;
-		justify-content: space-evenly;
+		padding: 2em 1.5em 0 1.5em;
+		justify-content: space-between;
 		grid-template-columns: repeat(2, 264px);
 		row-gap: 4.6875rem;
 	}
@@ -21,12 +22,13 @@
 @media (min-width: 62em) {
 	.card_container {
 		grid-template-columns: repeat(3, 264px);
-		justify-content: space-evenly;
+		justify-content: space-between;
 	}
 }
 
 @media (min-width: 75em) {
 	.card_container {
 		grid-template-columns: repeat(4, 264px);
+		padding: 0;
 	}
 }

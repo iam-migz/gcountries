@@ -1,10 +1,13 @@
 import styles from '@/styles/Header.module.css';
+import Link from 'next/link';
 
 function Header() {
 	return (
 		<header className={styles.header}>
 			<div className={styles.container}>
-				<h1>GCountries</h1>
+				<Link href={'/'}>
+					<h1>GCountries</h1>
+				</Link>
 				<nav className={styles.nav}>
 					<h3>Browse</h3>
 					<h3>Play</h3>

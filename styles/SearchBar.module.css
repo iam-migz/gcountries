@@ -1,0 +1,37 @@
+.searchbar {
+	position: relative;
+	max-width: 30rem;
+}
+
+.searchbar input {
+	width: 100%;
+	display: block;
+	border: none;
+	/* background: var(--main); */
+	/* color: var(--typography); */
+	font-size: 1rem;
+	line-height: 1.25rem;
+	padding: 0.875rem 0.875em 0.875rem 4.625rem;
+	border-radius: 0.3125rem;
+	box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.0532439);
+	outline: 0;
+	appearance: none;
+}
+
+.searchbar input::placeholder {
+	font-size: 0.75rem;
+	line-height: 1.25rem;
+}
+
+.icon {
+	position: absolute;
+	top: 50%;
+	left: 2rem;
+	transform: translateY(-50%);
+}
+
+/* @media (min-width: 768px) {
+	.searchbar {
+		padding: 0 1.5em;
+	}
+} */

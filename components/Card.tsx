@@ -13,7 +13,6 @@ interface Props {
 }
 
 function Card({ name, alpha3Code, population, region, capital, flag }: Props) {
-	console.log('flag', flag);
 	return (
 		<Link href={`/details/${alpha3Code}`}>
 			<div className={styles.card}>

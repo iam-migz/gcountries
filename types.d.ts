@@ -7,7 +7,6 @@ export interface Country {
 	region: string;
 	population: number;
 	demonym: string;
-	timezones: string[];
 	borders?: string[];
 	nativeName: string;
 	currencies?: Currency[];
@@ -16,7 +15,7 @@ export interface Country {
 	flag: string;
 }
 
-// name,alpha3Code,capital,altSpellings,subregion,region,population,demonym,timezones,borders,nativeName,flag,currencies,regionalBlocs,independent
+// name,alpha3Code,capital,altSpellings,subregion,region,population,demonym,borders,nativeName,flag,currencies,regionalBlocs,independent
 
 export interface Currency {
 	code: string;
