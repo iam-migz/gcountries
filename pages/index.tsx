@@ -4,12 +4,26 @@ import { Country } from '@/types';
 import Card from '@/components/Card';
 import SearchBar from '@/components/SearchBar';
 import FilterBox from '@/components/FilterBox';
+import { useState } from 'react';
 
 interface Props {
-	countries: Country[];
+	countriesOrig: Country[];
 }
 
-export default function Home({ countries }: Props) {
+export default function Home({ countriesOrig }: Props) {
+	const [countries, setCountries] = useState(countriesOrig);
+
+	const onSearch = (value: string) => {
+		if (value.trim().length) {
+			const temp = countries.filter((country) => {
+				return country.name.trim().toLocaleLowerCase().startsWith(value);
+			});
+			setCountries(temp);
+		} else {
+			setCountries(countriesOrig);
+		}
+	};
+
 	return (
 		<>
 			<Head>
@@ -20,7 +34,7 @@ export default function Home({ countries }: Props) {
 			</Head>
 			<main className={styles.container}>
 				<div className={styles.filters}>
-					<SearchBar />
+					<SearchBar onSearch={onSearch} />
 					<FilterBox />
 				</div>
 				<div className={styles.card_container}>
@@ -32,11 +46,18 @@ export default function Home({ countries }: Props) {
 }
 
 export const getStaticProps = async () => {
-	const res = await fetch('https://restcountries.com/v2/all?fields=name,alpha3Code,capital,region,population,flag');
-	const data = await res.json();
-	return {
-		props: {
-			countries: data,
-		},
-	};
+	try {
+		const res = await fetch('https://restcountries.com/v2/all?fields=name,alpha3Code,capital,region,population,flag');
+		const data = await res.json();
+		return {
+			props: {
+				countriesOrig: data,
+			},
+		};
+	} catch (error) {
+		console.log(error);
+		return {
+			notFound: true,
+		};
+	}
 };

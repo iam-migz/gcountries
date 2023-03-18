@@ -10,23 +10,28 @@
 	justify-content: center;
 	row-gap: 2.5rem;
 }
-@media (min-width: 48em) {
+@media (min-width: 768px) {
 	.card_container {
 		padding: 2em 1.5em 0 1.5em;
 		justify-content: space-evenly;
 		grid-template-columns: repeat(2, 264px);
 		row-gap: 3rem;
 	}
+	.filters {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 }
 
-@media (min-width: 62em) {
+@media (min-width: 992px) {
 	.card_container {
 		grid-template-columns: repeat(3, 264px);
 		justify-content: space-between;
 	}
 }
 
-@media (min-width: 75em) {
+@media (min-width: 1200px) {
 	.card_container {
 		grid-template-columns: repeat(4, 264px);
 		padding: 2em 0;

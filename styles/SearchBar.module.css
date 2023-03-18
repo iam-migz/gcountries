@@ -28,13 +28,9 @@
 
 @media (min-width: 768px) {
 	.searchbar {
-		width: 480px;
 		padding: 0;
 	}
 	.icon {
 		left: 1rem;
-	}
-	.searchbar input::placeholder {
-		font-size: 0.87rem;
 	}
 }

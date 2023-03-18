@@ -16,7 +16,7 @@ function Card({ name, alpha3Code, population, region, capital, flag }: Props) {
 	return (
 		<Link href={`/details/${alpha3Code}`}>
 			<div className={styles.card}>
-				<Image src={flag} alt="country flag" width={300} height={300} priority />
+				<Image src={flag} alt="country flag" width={300} height={200} priority />
 				<div>
 					<h3>{name}</h3>
 					<ul>
