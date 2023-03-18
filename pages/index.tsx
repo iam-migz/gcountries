@@ -5,6 +5,8 @@ import Card from '@/components/Card';
 import SearchBar from '@/components/SearchBar';
 import FilterBox from '@/components/FilterBox';
 import { useState } from 'react';
+import path from 'path';
+import fs from 'fs';
 
 interface Props {
 	countriesOrig: Country[];
@@ -47,11 +49,12 @@ export default function Home({ countriesOrig }: Props) {
 
 export const getStaticProps = async () => {
 	try {
-		const res = await fetch('https://restcountries.com/v2/all?fields=name,alpha3Code,capital,region,population,flag');
-		const data = await res.json();
+		const dataFilePath = path.join(process.cwd(), 'public', 'data', 'countries.json');
+		const jsonData: Country[] = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
+
 		return {
 			props: {
-				countriesOrig: data,
+				countriesOrig: jsonData,
 			},
 		};
 	} catch (error) {
