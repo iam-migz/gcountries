@@ -4,7 +4,7 @@ import { Country } from '@/types';
 import Card from '@/components/Card';
 import SearchBar from '@/components/SearchBar';
 import FilterBox from '@/components/FilterBox';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import path from 'path';
 import fs from 'fs';
 
@@ -16,7 +16,7 @@ export default function Home({ countriesOrig }: Props) {
 	const [countries, setCountries] = useState(countriesOrig);
 
 	const onSearch = (value: string) => {
-		if (value.trim().length) {
+		if (value.length) {
 			const temp = countries.filter((country) => {
 				return country.name.trim().toLocaleLowerCase().startsWith(value);
 			});
@@ -52,9 +52,18 @@ export const getStaticProps = async () => {
 		const dataFilePath = path.join(process.cwd(), 'public', 'data', 'countries.json');
 		const jsonData: Country[] = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
 
+		const filteredData = jsonData.filter((d) => ({
+			name: d.name,
+			alpha3Code: d.alpha3Code,
+			capital: d.capital,
+			region: d.region,
+			population: d.population,
+			flag: d.flag,
+		}));
+
 		return {
 			props: {
-				countriesOrig: jsonData,
+				countriesOrig: filteredData,
 			},
 		};
 	} catch (error) {

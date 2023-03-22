@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import styles from '@/styles/Card.module.css';
 import Link from 'next/link';
+import { formatNumber } from '@/utils';
 
 interface Props {
 	name: string;
@@ -22,7 +23,7 @@ function Card({ name, alpha3Code, population, region, capital, flag }: Props) {
 					<ul>
 						<li>
 							<span>Population: </span>
-							{population}
+							{formatNumber(population) ?? '-'}
 						</li>
 						<li>
 							<span>Region: </span>

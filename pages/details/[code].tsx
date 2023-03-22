@@ -4,6 +4,7 @@ import styles from '@/styles/Detail.module.css';
 import Head from 'next/head';
 import path from 'path';
 import fs from 'fs';
+import { formatNumber } from '@/utils';
 
 interface Props {
 	country: Country;
@@ -57,7 +58,7 @@ function details({ country }: Props) {
 									<span>Capital:</span> {country.capital ?? ''}
 								</li>
 								<li>
-									<span>Population:</span> {country.population}
+									<span>Population:</span> {formatNumber(country.population) ?? ''}
 								</li>
 							</ul>
 						</div>
