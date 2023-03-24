@@ -4,7 +4,7 @@ import { Country } from '@/types';
 import Card from '@/components/Card';
 import SearchBar from '@/components/SearchBar';
 import FilterBox from '@/components/FilterBox';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import path from 'path';
 import fs from 'fs';
 
@@ -13,7 +13,11 @@ interface Props {
 }
 
 export default function Home({ countriesOrig }: Props) {
-	const [countries, setCountries] = useState(countriesOrig);
+	const halfLength = Math.ceil(countriesOrig.length / 2);
+	const firstHalf = countriesOrig.slice(0, halfLength);
+	const secondHalf = countriesOrig.slice(halfLength);
+
+	const [countries, setCountries] = useState(firstHalf);
 
 	const onSearch = (value: string) => {
 		if (value.length) {
@@ -22,7 +26,7 @@ export default function Home({ countriesOrig }: Props) {
 			});
 			setCountries(temp);
 		} else {
-			setCountries(countriesOrig);
+			setCountries(firstHalf);
 		}
 	};
 
@@ -52,14 +56,13 @@ export const getStaticProps = async () => {
 		const dataFilePath = path.join(process.cwd(), 'public', 'data', 'countries.json');
 		const jsonData: Country[] = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
 
-		const filteredData = jsonData.filter((d) => ({
-			name: d.name,
-			alpha3Code: d.alpha3Code,
-			capital: d.capital,
-			region: d.region,
-			population: d.population,
-			flag: d.flag,
-		}));
+		const propertiesToKeep = ['name', 'alpha3Code', 'capital', 'region', 'population', 'flag'];
+
+		const filteredData = jsonData.map((country) => {
+			const filteredEntries = Object.entries(country).filter(([key]) => propertiesToKeep.includes(key));
+			const filteredObject = Object.fromEntries(filteredEntries);
+			return filteredObject;
+		});
 
 		return {
 			props: {
