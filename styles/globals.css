@@ -1,15 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
-	--foreground: #fff;
-	--background: #fafafa;
-	--typography: #111517;
+	--bg: #fafafa;
+	--accent1: #fff;
+	/* --accent2: hsl(21, 84%, 56%); */
+	/* --accent3: hsl(40, 89%, 65%); */
+	--text: #111517;
+	--placeholder: #848484;
 }
 
 .dark {
-	--foreground: #2b3844;
-	--background: #202c36;
-	--typography: #fff;
+	--bg: #202c36;
+	--accent1: #2b3844;
+	--text: #fff;
+	--placeholder: #fff;
+}
+
+#app {
+	background: var(--bg);
+	min-height: 100vh;
 }
 
 * {
@@ -21,12 +30,11 @@
 
 body {
 	font-family: 'Nunito Sans', sans-serif;
-	background: var(--background);
 }
 
 a {
 	text-decoration: none;
-	color: var(--typography);
+	color: var(--text);
 }
 
 img {

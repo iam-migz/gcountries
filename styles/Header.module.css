@@ -1,12 +1,14 @@
 .header {
 	width: 100%;
-	background: var(--primary);
+	background: var(--accent1);
+	color: var(--text);
 	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0562443);
+	padding: 1em 0;
 }
 
 .header h1 {
 	text-align: center;
-	padding-top: 0.3em;
+	font-size: 1.7rem;
 }
 
 .container {
@@ -16,10 +18,12 @@
 
 .nav {
 	display: flex;
-	justify-content: center;
 	align-self: center;
-	gap: 2em;
-	padding-bottom: 0.4em;
+	cursor: pointer;
+}
+.nav svg {
+	height: 1.4rem;
+	width: 1.4rem;
 }
 
 @media (min-width: 768px) {
