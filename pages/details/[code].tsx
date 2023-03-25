@@ -5,13 +5,19 @@ import Head from 'next/head';
 import path from 'path';
 import fs from 'fs';
 import { formatNumber } from '@/utils';
+import Link from 'next/link';
+import { IoMdArrowRoundBack } from 'react-icons/io';
+import { useRouter } from 'next/router';
 
 interface Props {
 	country: Country;
+	borders: Country[];
 }
 
-function details({ country }: Props) {
+function Details({ country, borders }: Props) {
 	const title = `${country.name} | GCountries`;
+	const router = useRouter();
+
 	return (
 		<>
 			<Head>
@@ -22,6 +28,11 @@ function details({ country }: Props) {
 			</Head>
 
 			<div className={styles.container}>
+				<button className={styles.back} onClick={() => router.back()}>
+					<IoMdArrowRoundBack />
+					Back
+				</button>
+
 				<main className={styles.main}>
 					<div className={styles.flag}>
 						<img src={country.flag} alt={`flag of ${country.name}`} />
@@ -31,7 +42,7 @@ function details({ country }: Props) {
 						<div className={styles.info}>
 							<ul>
 								<li>
-									<span>Native Name:</span> {country.name}
+									<span>Native Name:</span> {country.nativeName}
 								</li>
 								<li>
 									<span>Other Names:</span> {country.altSpellings?.toString() ?? ''}
@@ -64,7 +75,13 @@ function details({ country }: Props) {
 						</div>
 						<div className={styles.borders}>
 							<h4>Border Countries:</h4>
-							<div>{country.borders?.toString()}</div>
+							<ul className={styles.boxContainer}>
+								{borders?.map((border) => (
+									<Link href={`/details/${border.alpha3Code}`} key={border.alpha3Code}>
+										<li className={styles.box}>{border.name}</li>
+									</Link>
+								))}
+							</ul>
 						</div>
 					</div>
 				</main>
@@ -73,7 +90,7 @@ function details({ country }: Props) {
 	);
 }
 
-export default details;
+export default Details;
 
 export const getStaticPaths = async () => {
 	const dataFilePath = path.join(process.cwd(), 'public', 'data', 'countries.json');
@@ -98,11 +115,15 @@ export const getStaticProps = async (context: any) => {
 	const dataFilePath = path.join(process.cwd(), 'public', 'data', 'countries.json');
 	const jsonData: Country[] = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
 
-	const data = jsonData.find((d) => d.alpha3Code === code);
+	const country = jsonData.find((d) => d.alpha3Code === code);
+	const borders = jsonData
+		.filter((d) => country?.borders?.find((border) => border === d.alpha3Code))
+		.sort((a, b) => a.name.localeCompare(b.name));
 
 	return {
 		props: {
-			country: data,
+			country,
+			borders,
 		},
 	};
 };

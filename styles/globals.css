@@ -19,6 +19,7 @@
 #app {
 	background: var(--bg);
 	min-height: 100vh;
+	transition: background 400ms ease-in-out, color 800ms ease;
 }
 
 * {
