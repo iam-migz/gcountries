@@ -30,18 +30,6 @@ export interface Language {
 	nativeName?: string;
 }
 
-// enum this later
-// export enum Region {
-// 	Africa = 'Africa',
-// 	Americas = 'Americas',
-// 	Antarctic = 'Antarctic',
-// 	AntarcticOcean = 'Antarctic Ocean',
-// 	Asia = 'Asia',
-// 	Europe = 'Europe',
-// 	Oceania = 'Oceania',
-// 	Polar = 'Polar',
-// }
-
 export interface RegionalBloc {
 	acronym: Acronym;
 	name: string;
