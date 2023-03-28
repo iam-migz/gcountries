@@ -1,19 +1,14 @@
+import { FilterProperties } from '@/types';
 import React, { createContext, useContext, useState } from 'react';
 
-interface FilterContextType {
-	isIndependent: boolean | null;
-	region: string;
-	subRegion: string;
+interface ExtendedFilterContextType extends FilterProperties {
+	updateFilters: (updatedFilters: Partial<FilterProperties>) => void;
 }
 
-interface ExtendedFilterContextType extends FilterContextType {
-	updateFilters: (updatedFilters: Partial<FilterContextType>) => void;
-}
-
-const defaultFilterContext: FilterContextType = {
-	isIndependent: null,
+const defaultFilterContext: FilterProperties = {
+	independent: true,
 	region: 'None',
-	subRegion: 'None',
+	subregion: 'None',
 };
 
 const FilterContext = createContext<ExtendedFilterContextType>({ ...defaultFilterContext, updateFilters: () => {} });
@@ -25,9 +20,9 @@ interface FilterProviderProps {
 }
 
 const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
-	const [filters, setFilters] = useState<FilterContextType>(defaultFilterContext);
+	const [filters, setFilters] = useState<FilterProperties>(defaultFilterContext);
 
-	const updateFilters = (updatedFilters: Partial<FilterContextType>) => {
+	const updateFilters = (updatedFilters: Partial<FilterProperties>) => {
 		setFilters({ ...filters, ...updatedFilters });
 	};
 

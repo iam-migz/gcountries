@@ -15,13 +15,10 @@ export interface Country {
 	flag: string;
 }
 
-export interface FilteredCountry
-	extends Pick<
-		Country,
-		'name' | 'alpha3Code' | 'capital' | 'region' | 'subregion' | 'independent' | 'population' | 'flag'
-	> {}
+export interface CountrySlim
+	extends Omit<Country, 'altSpellings' | 'demonym' | 'borders' | 'nativeName' | 'currencies' | 'regionalBlocs'> {}
 
-// name,alpha3Code,capital,altSpellings,subregion,region,population,demonym,borders,nativeName,flag,currencies,regionalBlocs,independent
+export interface FilterProperties extends Pick<Country, 'region' | 'subregion' | 'independent'> {}
 
 export interface Currency {
 	code: string;

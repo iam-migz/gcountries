@@ -3,10 +3,10 @@
 :root {
 	--bg: #fafafa;
 	--accent1: #fff;
-	/* --accent2: hsl(21, 84%, 56%); */
-	/* --accent3: hsl(40, 89%, 65%); */
 	--text: #111517;
 	--placeholder: #848484;
+	--transition-bg: background 300ms ease-in-out;
+	--transition-text: color 700ms ease;
 }
 
 .dark {
@@ -19,7 +19,7 @@
 #app {
 	background: var(--bg);
 	min-height: 100vh;
-	transition: background 400ms ease-in-out, color 800ms ease;
+	transition: var(--transition-bg), var(--transition-text);
 }
 
 * {

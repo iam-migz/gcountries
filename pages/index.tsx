@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import styles from '@/styles/Home.module.css';
-import { Country, FilteredCountry } from '@/types';
+import { Country, CountrySlim, FilterProperties } from '@/types';
 import Card from '@/components/Card';
 import SearchBar from '@/components/SearchBar';
 import FilterBox from '@/components/FilterBox';
@@ -10,16 +10,12 @@ import fs from 'fs';
 import { useFilter } from '@/contexts/FilterContext';
 
 interface Props {
-	countriesOrig: FilteredCountry[];
+	countriesOrig: CountrySlim[];
 }
 
 export default function Home({ countriesOrig }: Props) {
-	const { region, subRegion, isIndependent } = useFilter();
-	const halfLength = Math.ceil(countriesOrig.length / 2);
-	const firstHalf = countriesOrig.slice(0, halfLength);
-	const secondHalf = countriesOrig.slice(halfLength);
-
-	const [countries, setCountries] = useState(firstHalf);
+	const { region, subregion, independent, updateFilters } = useFilter();
+	const [countries, setCountries] = useState(countriesOrig);
 
 	const onSearch = (value: string) => {
 		if (value.length) {
@@ -28,35 +24,40 @@ export default function Home({ countriesOrig }: Props) {
 			});
 			setCountries(temp);
 		} else {
-			setCountries(firstHalf);
+			updateFilters({
+				independent: true,
+				region: 'None',
+				subregion: 'None',
+			});
+			setCountries(countriesOrig);
 		}
 	};
 
 	useEffect(() => {
-		type FilterTypes = Pick<FilteredCountry, 'region' | 'subregion' | 'independent'>;
-		const properties: (keyof FilterTypes)[] = [];
-
-		const tempObj: FilterTypes = {
+		const properties: (keyof FilterProperties)[] = [];
+		const filterPropsObj: FilterProperties = {
 			region,
-			subregion: subRegion,
-			independent: isIndependent === null ? false : isIndependent,
+			subregion,
+			independent,
 		};
 		if (region !== 'None') {
 			properties.push('region');
 		}
-		if (subRegion !== 'None') {
+		if (subregion !== 'None') {
 			properties.push('subregion');
 		}
-		if (isIndependent !== null) {
+		if (independent !== null) {
 			properties.push('independent');
 		}
 
-		const final = countriesOrig.filter((country) => properties.every((prop) => country[prop] === tempObj[prop]));
+		const filteredCountries = countriesOrig.filter((country) =>
+			properties.every((prop) => country[prop] === filterPropsObj[prop])
+		);
 
-		setCountries(final);
+		setCountries(filteredCountries);
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [region, subRegion, isIndependent]);
+	}, [region, subregion, independent]);
 
 	return (
 		<>

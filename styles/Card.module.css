@@ -7,7 +7,7 @@
 	background: var(--accent1);
 	color: var(--text);
 	overflow: hidden;
-	transition: background 400ms ease-in-out, color 800ms ease;
+	transition: var(--transition-bg), var(--transition-text);
 }
 
 .card img {

@@ -7,14 +7,14 @@ import { MdClear } from 'react-icons/md';
 import { useFilter } from '@/contexts/FilterContext';
 
 function FilterBox() {
-	const { region, subRegion, isIndependent, updateFilters } = useFilter();
+	const { region, subregion, independent, updateFilters } = useFilter();
 	const [regionIndex, setRegionIndex] = useState(0);
 
 	const handleClearFilters = () => {
 		updateFilters({
-			isIndependent: null,
+			independent: true,
 			region: 'None',
-			subRegion: 'None',
+			subregion: 'None',
 		});
 	};
 
@@ -54,8 +54,8 @@ function FilterBox() {
 						<select
 							name="subregion"
 							id="subregion"
-							onChange={(e) => updateFilters({ subRegion: e.target.value })}
-							value={subRegion}
+							onChange={(e) => updateFilters({ subregion: e.target.value })}
+							value={subregion}
 						>
 							{FILTER_DATA[regionIndex].subregions.map((d) => (
 								<option value={d} key={d}>
@@ -71,8 +71,8 @@ function FilterBox() {
 						<label className={s.toggle}>
 							<input
 								type="checkbox"
-								checked={isIndependent === null ? false : isIndependent}
-								onChange={() => updateFilters({ isIndependent: !isIndependent })}
+								checked={independent}
+								onChange={() => updateFilters({ independent: !independent })}
 							/>
 							<span className={s.slider}></span>
 						</label>

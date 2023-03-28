@@ -8,7 +8,7 @@
 	padding: 0 1.5em;
 	font-size: 0.85rem;
 	color: var(--text);
-	transition: color 800ms ease;
+	transition: var(--transition-text);
 }
 
 .flag img {
@@ -41,7 +41,7 @@
 .back {
 	border: 0;
 	width: 120px;
-	transition: background 400ms ease-in-out;
+	transition: var(--transition-bg);
 	background: var(--accent1);
 	box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.0294384);
 	padding: 1rem;
@@ -65,7 +65,7 @@
 .box {
 	font-size: 0.8rem;
 	background: var(--accent1);
-	transition: background 400ms ease-in-out;
+	transition: var(--transition-bg);
 	padding: 10px;
 	border-radius: 0.25em;
 }
