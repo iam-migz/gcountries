@@ -30,18 +30,41 @@ export const SUB_REGIONS = [
 	'North America',
 ];
 
-export const REGIONAL_BLOCS = [
-	'AL',
-	'ASEAN',
-	'AU',
-	'CAIS',
-	'CARICOM',
-	'CEFTA',
-	'EEU',
-	'EFTA',
-	'EU',
-	'NAFTA',
-	'PA',
-	'SAARC',
-	'USAN',
+export const FILTER_DATA = [
+	{
+		region: 'None',
+		subregions: ['None'],
+	},
+	{
+		region: 'Asia',
+		subregions: ['None', 'Southern Asia', 'Western Asia', 'South-Eastern Asia', 'Eastern Asia', 'Central Asia'],
+	},
+	{
+		region: 'Europe',
+		subregions: ['None', 'Northern Europe', 'Southern Europe', 'Central Europe', 'Eastern Europe', 'Western Europe'],
+	},
+	{
+		region: 'Africa',
+		subregions: ['None', 'Northern Africa', 'Middle Africa', 'Western Africa', 'Southern Africa', 'Eastern Africa'],
+	},
+	{
+		region: 'Oceania',
+		subregions: ['None', 'Polynesia', 'Australia and New Zealand', 'Melanesia', 'Micronesia'],
+	},
+	{
+		region: 'Americas',
+		subregions: ['None', 'South America', 'Central America', 'Northern America', 'North America', 'Caribbean'],
+	},
+	{
+		region: 'Polar',
+		subregions: ['None', 'Antarctica'],
+	},
+	{
+		region: 'Antarctic Ocean',
+		subregions: ['None', 'South Antarctic Ocean'],
+	},
+	{
+		region: 'Antarctic',
+		subregions: ['None', 'Antarctic'],
+	},
 ];

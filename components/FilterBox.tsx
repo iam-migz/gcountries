@@ -1,16 +1,30 @@
-import { IoFilterOutline } from 'react-icons/io5';
-import s from '@/styles/FilterBox.module.css';
+import { useEffect, useState } from 'react';
+import { FILTER_DATA } from '@/utils/constants';
 import Dropdown from './Dropdown';
 import Select from './Select';
-import { REGIONAL_BLOCS, REGIONS, SUB_REGIONS } from '@/utils/constants';
-import { useState } from 'react';
+import s from '@/styles/FilterBox.module.css';
+import { IoFilterOutline } from 'react-icons/io5';
+import { MdClear } from 'react-icons/md';
 
 function FilterBox() {
 	const [checked, setChecked] = useState(false);
+	const [region, setRegion] = useState('None');
+	const [regionIndex, setRegionIndex] = useState(0);
+	const [subRegion, setSubRegion] = useState('None');
 
 	const handleChange = () => {
 		setChecked(!checked);
 	};
+
+	const handleClearFilters = () => {
+		setChecked(false);
+		setRegion('None');
+		setSubRegion('None');
+	};
+
+	useEffect(() => {
+		setRegionIndex(FILTER_DATA.findIndex((d) => d.region === region));
+	}, [region]);
 	return (
 		<Dropdown
 			button={
@@ -21,9 +35,8 @@ function FilterBox() {
 			}
 			content={
 				<div className={s.options}>
-					<Select title="Regions" data={REGIONS} />
-					<Select title="Sub Regions" data={SUB_REGIONS} />
-					<Select title="Regional Blocs" data={REGIONAL_BLOCS} />
+					<Select title="Regions" data={FILTER_DATA.map((data) => data.region)} action={setRegion} />
+					<Select title="Sub Regions" data={FILTER_DATA[regionIndex].subregions} action={setSubRegion} />
 					<div>
 						<p>Independent</p>
 						<label className={s.toggle}>
@@ -31,12 +44,9 @@ function FilterBox() {
 							<span className={s.slider}></span>
 						</label>
 					</div>
-					<div className={s.clearFiltersContainer}>
+					<div className={s.clearFiltersContainer} onClick={handleClearFilters}>
 						<button className={s.clearFilters}>
-							<svg viewBox="0 0 10 10" width="10" height="10">
-								<line x1="1" y1="1" x2="9" y2="9" stroke="#fff" stroke-width="2" />
-								<line x1="1" y1="9" x2="9" y2="1" stroke="#fff" stroke-width="2" />
-							</svg>
+							<MdClear />
 							Clear Filters
 						</button>
 					</div>
