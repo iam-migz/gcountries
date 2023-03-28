@@ -15,6 +15,12 @@ export interface Country {
 	flag: string;
 }
 
+export interface FilteredCountry
+	extends Pick<
+		Country,
+		'name' | 'alpha3Code' | 'capital' | 'region' | 'subregion' | 'independent' | 'population' | 'flag'
+	> {}
+
 // name,alpha3Code,capital,altSpellings,subregion,region,population,demonym,borders,nativeName,flag,currencies,regionalBlocs,independent
 
 export interface Currency {

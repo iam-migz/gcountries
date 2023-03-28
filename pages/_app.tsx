@@ -1,4 +1,5 @@
 import Header from '@/components/Header';
+import { FilterProvider } from '@/contexts/FilterContext';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { useState } from 'react';
@@ -13,7 +14,9 @@ export default function App({ Component, pageProps }: AppProps) {
 		<>
 			<div className={isDarkMode ? 'dark' : ''} id="app">
 				<Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
-				<Component {...pageProps} />
+				<FilterProvider>
+					<Component {...pageProps} />
+				</FilterProvider>
 			</div>
 		</>
 	);
